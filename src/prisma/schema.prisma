@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  role      Role     @default(USER)
+  feeds     Feed[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Feed {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  type      FeedType
+  name      String?
+  url       String
+
+  @@index([userId])
+}
+
+enum FeedType {
+  RSS
+  ATOM
+  JSON
+}
+
+model FeedItem {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  title     String?
+  excerpt   String?
+}
