@@ -1,45 +1,19 @@
-'use client'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Flex, Link } from '@radix-ui/themes'
 
 export function Tabs() {
-  const pathname = usePathname()
-
   return (
-    <nav
-      className="flex justify-center border-b border-stone-300"
-      aria-label="page navigation"
-    >
-      <Link
-        className={`px-8 py-4 font-semibold border-b-4 ${
-          pathname === '/'
-            ? 'border-blue-600 text-blue-700'
-            : 'text-stone-600 border-transparent'
-        }`}
-        href="/"
-      >
-        Feed
-      </Link>
-      <Link
-        className={`px-8 py-4 font-semibold border-b-4 ${
-          pathname === '/settings'
-            ? 'border-blue-600 text-blue-700'
-            : 'text-stone-600 border-transparent'
-        }`}
-        href="/settings"
-      >
-        Settings
-      </Link>
-      <Link
-        className={`px-8 py-4 font-semibold border-b-4 ${
-          pathname === '/profile'
-            ? 'border-blue-600 text-blue-700'
-            : 'text-stone-600 border-transparent'
-        }`}
-        href="/profile"
-      >
-        Profile
-      </Link>
+    <nav aria-label="app navigation" style={{ position: 'fixed', bottom: 0 }}>
+      <Flex gap="2" justify={'center'}>
+        <Link href="/" size={'6'}>
+          Feed
+        </Link>
+        <Link href="/settings" size={'6'}>
+          Settings
+        </Link>
+        <Link href="/profile" size={'6'}>
+          Profile
+        </Link>
+      </Flex>
     </nav>
   )
 }
