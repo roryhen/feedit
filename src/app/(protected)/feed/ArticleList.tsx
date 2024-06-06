@@ -1,12 +1,12 @@
-import { KEY_FEEDS, get } from '@/lib/store'
 import { Grid } from '@radix-ui/themes'
 import Parser from 'rss-parser'
 import { FeedCard } from './FeedCard'
+import { getFeeds } from '@/lib/server/feed-store'
 
 const parser = new Parser()
 
 async function getArticles() {
-  const feeds = (await get(KEY_FEEDS)) as string[]
+  const feeds = await getFeeds()
 
   if (!feeds) {
     return []
@@ -41,7 +41,7 @@ export default async function ArticleList() {
   const articles = await getArticles()
 
   return (
-    <Grid gap={'4'}>
+    <Grid gap="4">
       {articles.map(({ title, date, snippet, link, source }) => {
         return (
           <FeedCard

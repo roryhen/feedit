@@ -13,7 +13,7 @@ export function FeedSource({ title, description, link, url }: Props) {
     <Card key={url}>
       <Flex align="center" justify="between">
         <Box>
-          <Heading as="h2" size="4">
+          <Heading as="h2" size="2">
             <Link href={link ?? ''}>{title}</Link>
           </Heading>
           <Text size="2">{description}</Text>

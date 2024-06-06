@@ -1,12 +1,12 @@
 import { Grid } from '@radix-ui/themes'
 import Parser from 'rss-parser'
 import { FeedSource } from './FeedSource'
-import { KEY_FEEDS, get } from '@/lib/store'
+import { getFeeds } from '@/lib/server/feed-store'
 
 const parser = new Parser()
 
 async function getFeedInfo() {
-  const feeds = (await get(KEY_FEEDS)) as string[]
+  const feeds = await getFeeds()
 
   if (!feeds) {
     return []
